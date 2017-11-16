@@ -61,7 +61,15 @@ extension ViewController {
         anim.timingFunctions = [CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)]
         anim.isRemovedOnCompletion = false
         anim.fillMode = kCAFillModeForwards
+        anim.delegate = self
         maskLayer.add(anim, forKey: nil)
+    }
+}
+
+extension ViewController:CAAnimationDelegate {
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        contentV.layer.mask = nil
+        maskLayer.removeFromSuperlayer()
     }
 }
 
